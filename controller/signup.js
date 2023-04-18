@@ -18,7 +18,7 @@ function generateToken(id,name,ispremium){
 }
 
 const signUp = async (req, res, next) => {
-    console.log(req)
+
     try{
         const { Name, Number, Email, Password } = req.body;
         if (isstringvalidate(Name) || isstringvalidate(Email) || isstringvalidate(Password)) {

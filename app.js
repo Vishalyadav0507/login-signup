@@ -3,6 +3,8 @@ const path=require("path")
 const express=require("express")
 const cors=require('cors');
 const bodyParser = require('body-parser');
+const dotenv=require("dotenv")
+dotenv.config()
 
 const sequelize=require("./util/database")
 const usersRoute=require("./route/singup");
@@ -13,7 +15,7 @@ const app=express()
 app.use(session({
     resave: false,
     saveUninitialized: true,
-    secret: 'SECRET' 
+    secret:"SECRET"
   }));
   
 app.use(passport.initialize())
@@ -77,8 +79,8 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const GOOGLE_CLIENT_ID = 'our-google-client-id';
 const GOOGLE_CLIENT_SECRET = 'our-google-client-secret';
 passport.use(new GoogleStrategy({
-    clientID: "280496498555-2hbhtmt06i2rb0dfpl2uhm1to0p9dums.apps.googleusercontent.com",
-    clientSecret: "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",
+    clientID: process.env.CLIENT_ID,
+    clientSecret:process.env.CLIENT_SECRET,
     callbackURL: "http://localhost:3000/auth/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
